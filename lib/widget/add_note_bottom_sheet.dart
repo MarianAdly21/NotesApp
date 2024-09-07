@@ -1,42 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:notes_app/widget/custom_button.dart';
-
-import 'package:notes_app/widget/custom_text_field.dart';
+import 'package:notes_app/widget/custom_add_note_form.dart';
 
 class AddNoteBottomSheet extends StatelessWidget {
   const AddNoteBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: 16,
+    return Padding(
+      padding: EdgeInsetsDirectional.only(
+        start: 16,
+        end: 16,
+        bottom: MediaQuery.of(context).viewInsets.bottom,
       ),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 23,
-            ),
-            CustomTextField(
-              hitText: 'Title',
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            CustomTextField(
-              hitText: "Content",
-              maxLines: 5,
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            CustomButton(),
-            SizedBox(
-              height: 16,
-            ),
-          ],
-        ),
+      child:const  SingleChildScrollView(
+        child: AddNoteForm(),
       ),
     );
   }
