@@ -27,7 +27,7 @@ class NotesItem extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          color: Colors.yellow,
+          color: Color(note.color),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
@@ -53,7 +53,9 @@ class NotesItem extends StatelessWidget {
                 ),
               ),
               trailing: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  note.delete();
+                },
                 icon: const Icon(
                   FontAwesomeIcons.trash,
                   color: Colors.black,
