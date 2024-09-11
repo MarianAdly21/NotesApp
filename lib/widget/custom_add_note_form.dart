@@ -52,7 +52,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
           const SizedBox(
             height: 16,
           ),
-        const  ListOfColors(),
+          const ListOfColors(),
           const SizedBox(
             height: 16,
           ),
@@ -61,21 +61,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
               return CustomButton(
                 isLoading: state is AddNoteLoading ? true : false,
                 onTap: () {
-                  DateTime dateTime = DateTime.now();
-                  String formattedDate =
-                      DateFormat('dd-mm-yyyy').format(dateTime);
-                  if (formKey.currentState!.validate()) {
-                    formKey.currentState!.save();
-                    var noteModel = NoteModel(
-                        title: title!,
-                        content: content!,
-                        date: formattedDate,
-                        color: Colors.purple.value);
-                    BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
-                  } else {
-                    autovalidateMode = AutovalidateMode.always;
-                    setState(() {});
-                  }
+                  validationToAddNote(context);
                 },
               );
             },
@@ -87,6 +73,25 @@ class _AddNoteFormState extends State<AddNoteForm> {
       ),
     );
   }
+
+  void validationToAddNote(BuildContext context) {
+    if (formKey.currentState!.validate()) {
+      formKey.currentState!.save();
+      var noteModel = NoteModel(
+          title: title!,
+          content: content!,
+          date: formattedDate(),
+          color: Colors.purple.value);
+      BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
+    } else {
+      autovalidateMode = AutovalidateMode.always;
+      setState(() {});
+    }
+  }
+
+  String formattedDate() {
+    DateTime dateTime = DateTime.now();
+    String formattedDate = DateFormat('dd-mm-yyyy').format(dateTime);
+    return formattedDate;
+  }
 }
-
-
